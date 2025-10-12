@@ -1,10 +1,9 @@
 package com.smartjira.smartjira.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.smartjira.smartjira.enums.Role;
+import com.smartjira.smartjira.enums.Status;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -14,10 +13,26 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class Tasks {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // To Complete
+    @NotBlank(message = "Task name is required")
+    @Size(min = 3, max = 100, message = "Task name must be between 3 and 100 characters")
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "developer_id", nullable = false)
+    @NotNull(message = "Developer must be assigned to the task")
+    private Developer developer;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
 
 }

@@ -3,6 +3,7 @@ package com.smartjira.smartjira.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.scheduling.config.Task;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class Developer {
     @OneToOne(mappedBy = "developer",cascade = CascadeType.ALL)
     private Salary salary;
 
-
+    @OneToMany(mappedBy = "developer",cascade = CascadeType.ALL)
+    private List<Tasks>tasks;
 
 }
