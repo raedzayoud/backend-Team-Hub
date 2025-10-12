@@ -24,8 +24,8 @@ public class Manager {
     @JoinColumn(name = "user_id",unique = true)
     private User user;
 
-    @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
-    private List<Tasks> tasks;
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
+    private List<Project> projects;
 
 
 
