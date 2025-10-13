@@ -1,5 +1,6 @@
 package com.smartjira.smartjira.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +21,7 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
-
+    //@JsonIgnore
     @OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
     private List<Tasks> tasks;
 
