@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.repository;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.ProjectDto;
 import com.smartjira.smartjira.model.Manager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,16 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
         WHERE m.id = :id
     """)
     List<DeveloperDto> findAllDevelopersByManagerId(@Param("id") int id);
+
+    @Query("""
+        SELECT new com.smartjira.smartjira.dto.ProjectDto(p.name)
+        FROM Manager m
+        JOIN m.projects p
+        WHERE m.id = :idManager
+    """)
+    List<ProjectDto> findAllProjectsByManagerId(@Param("idManager") int idManager);
+
+
+
+
 }

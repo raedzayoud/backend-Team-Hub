@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.service;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.ProjectDto;
 import com.smartjira.smartjira.repository.ManagerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,8 @@ public class ManagerService {
 
     public List<DeveloperDto> getDevelopersByManagerId(int managerId) {
         return managerRepository.findAllDevelopersByManagerId(managerId);
+    }
+    public List<ProjectDto> getProjectsByManagerId(int managerId) {
+        return managerRepository.findAllProjectsByManagerId(managerId);
     }
 }

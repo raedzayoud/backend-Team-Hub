@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.controller;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.ProjectDto;
 import com.smartjira.smartjira.service.ManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,4 +26,13 @@ public class ManagerController {
         response.put("developers", developers);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{idManager}")
+    public ResponseEntity<Map<String, List<ProjectDto>>> getProjectsByManagerId(@PathVariable int idManager) {
+        List<ProjectDto> projects = managerService.getProjectsByManagerId(idManager);
+        Map<String, List<ProjectDto>> response = new HashMap<>();
+        response.put("projects", projects);
+        return ResponseEntity.ok(response);
+    }
+
 }

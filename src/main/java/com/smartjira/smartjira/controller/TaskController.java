@@ -56,5 +56,15 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/projet/{idProject}")
+    public ResponseEntity<Map<String, List<Tasks>>> getAllTasksByProject(@PathVariable int idProject) {
+        List<Tasks>l=taskService.getTasksByProjectId(idProject);
+        Map<String, List<Tasks>> map = new HashMap<>();
+        map.put("tasks", l);
+        return ResponseEntity.ok(map);
+    }
+
+
+
 
 }

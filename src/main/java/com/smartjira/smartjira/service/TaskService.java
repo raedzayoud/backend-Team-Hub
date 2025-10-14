@@ -29,5 +29,8 @@ public class TaskService {
                 ()->new RuntimeException("Project with id " + id + " not found")
         );
     }
+    public List<Tasks> getTasksByProjectId(int projectId) {
+        return taskRepository.findAllTaskByProjectId(projectId);
+    }
 
 }
