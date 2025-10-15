@@ -27,6 +27,8 @@ public class Manager {
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
     private List<Project> projects;
 
+    @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
+    private List<Developer> developers;
 
 
 

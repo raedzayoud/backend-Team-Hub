@@ -33,4 +33,8 @@ public class Developer {
     @OneToMany(mappedBy = "developer",cascade = CascadeType.ALL)
     private List<Tasks>tasks;
 
+    @ManyToOne
+    @JoinColumn(name = "manager_id",unique = true)
+    private Manager manager;
+
 }

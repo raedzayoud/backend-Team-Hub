@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.controller;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.DeveloperLeaveDto;
 import com.smartjira.smartjira.dto.ProjectDto;
 import com.smartjira.smartjira.service.ManagerService;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,14 @@ public class ManagerController {
         Map<String, List<ProjectDto>> response = new HashMap<>();
         response.put("projects", projects);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{idManager}/pending-leaves")
+    public ResponseEntity<Map<String,List<DeveloperLeaveDto>>> getPendingLeaves(@PathVariable int idManager){
+        List<DeveloperLeaveDto> leaves = managerService.getAllPendingLeavesByManagerId(idManager);
+        HashMap m=new HashMap();
+        m.put("pendingleaves", leaves);
+        return ResponseEntity.ok(m);
     }
 
 }

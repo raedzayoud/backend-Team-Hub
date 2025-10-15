@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.service;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.DeveloperLeaveDto;
 import com.smartjira.smartjira.dto.ProjectDto;
 import com.smartjira.smartjira.repository.ManagerRepository;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,9 @@ public class ManagerService {
     }
     public List<ProjectDto> getProjectsByManagerId(int managerId) {
         return managerRepository.findAllProjectsByManagerId(managerId);
+    }
+
+    public List<DeveloperLeaveDto> getAllPendingLeavesByManagerId(int managerId){
+        return managerRepository.findAllLeaveByManagerId(managerId);
     }
 }

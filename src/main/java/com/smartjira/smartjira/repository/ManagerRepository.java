@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.repository;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.DeveloperLeaveDto;
 import com.smartjira.smartjira.dto.ProjectDto;
 import com.smartjira.smartjira.model.Manager;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,6 +30,22 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
     """)
     List<ProjectDto> findAllProjectsByManagerId(@Param("idManager") int idManager);
 
+    @Query("""
+    SELECT new com.smartjira.smartjira.dto.DeveloperLeaveDto(
+        d.user.name, 
+        d.user.email, 
+        l.nbDays, 
+        l.reason
+    )
+    FROM Manager m
+    JOIN m.projects p
+    JOIN p.tasks t
+    JOIN t.developer d
+    JOIN d.leaveReasons l
+    WHERE m.id = :idManager
+    AND l.status = com.smartjira.smartjira.enums.StatusLeave.Pending
+    """)
+    List<DeveloperLeaveDto> findAllLeaveByManagerId(@Param("idManager") int idManager);
 
 
 
