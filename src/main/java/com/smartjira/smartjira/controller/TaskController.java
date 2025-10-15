@@ -64,6 +64,14 @@ public class TaskController {
         return ResponseEntity.ok(map);
     }
 
+    @GetMapping("/developer/task/{idDeveloper}")
+    public ResponseEntity<Map<String, List<Tasks>>> findAllTaskByDeveloperId(@PathVariable int idDeveloper) {
+        List<Tasks>l=taskService.findAllTaskByDeveloperId(idDeveloper);
+        Map<String, List<Tasks>> map = new HashMap<>();
+        map.put("tasks", l);
+        return ResponseEntity.ok(map);
+    }
+
 
 
 

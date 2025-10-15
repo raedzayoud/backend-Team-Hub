@@ -33,4 +33,9 @@ public class TaskService {
         return taskRepository.findAllTaskByProjectId(projectId);
     }
 
+    public List<Tasks> findAllTaskByDeveloperId(int developerId) {
+        return  taskRepository.findAllTaskByDeveloperId(developerId);
+    }
+
+
 }

@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface DeveloperRepository extends CrudRepository<Developer, Long> {
     Optional<Developer> findById(int id);
+
 }
