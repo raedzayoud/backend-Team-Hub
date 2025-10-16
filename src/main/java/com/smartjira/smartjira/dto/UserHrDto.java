@@ -8,5 +8,6 @@ import lombok.Data;
 public class UserHrDto {
     String name;
     String email;
+    double salary;
     String password;
 }
