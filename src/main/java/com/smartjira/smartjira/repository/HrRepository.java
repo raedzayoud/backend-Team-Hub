@@ -33,8 +33,6 @@ public interface HrRepository extends JpaRepository<Hr,Long> {
 
     List<LeaveUserDto> getPendingLeave();
 
-    // FIX THE QUERY YOU FORGET THE DEVELOPER_id For the update
-
     @Transactional
     @Modifying
     @Query("UPDATE LeaveReason l SET l.status = 'APPROVED' WHERE l.status = 'PENDING' AND l.developer.id = :idDev")
@@ -59,6 +57,17 @@ public interface HrRepository extends JpaRepository<Hr,Long> {
             "JOIN d.user u " +
             "WHERE l.status = 'REJECTED'")
     List<LeaveUserDto> getRejectedLeave();
+
+    @Query("SELECT COUNT(d) FROM Developer d")
+    int countDeveloper();
+    @Query("select count(l)from  leave_reason l where l.status='PENDING'")
+    int countPendingLeave();
+
+    @Query("select count(l)from  leave_reason l where l.status='APPROVED'")
+    int countApprovedLeave();
+
+
+
 
 
 

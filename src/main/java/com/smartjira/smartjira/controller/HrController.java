@@ -92,4 +92,21 @@ public class HrController {
         response.put("message", "All pending leaves for developer " + idDev + " have been rejected.");
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/countApproved")
+    public ResponseEntity<Map<String, Integer>> countApprovedLeaves() {
+        HashMap<String, Integer> response = new HashMap<>();
+        response.put("countApprovedLeaves", hrService.countApprovedLeave());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/countPending")
+    public ResponseEntity<Map<String, Integer>> countPending() {
+        HashMap<String, Integer> response = new HashMap<>();
+        response.put("countPending", hrService.countPendingLeave());
+        return ResponseEntity.ok(response);
+    }
+
+
+
 }

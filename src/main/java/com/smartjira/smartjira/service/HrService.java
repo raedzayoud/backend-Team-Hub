@@ -84,5 +84,17 @@ public class HrService {
         hrRepository.updatePendingToRejected(idDev);
     }
 
+    public int countDeveloper(){
+        return hrRepository.countDeveloper();
+    }
+
+    public  int countApprovedLeave(){
+        return hrRepository.countApprovedLeave();
+    }
+
+    public int countPendingLeave(){
+        return hrRepository.countPendingLeave();
+    }
+
 
 }
