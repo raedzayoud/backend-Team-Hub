@@ -1,8 +1,6 @@
 package com.smartjira.smartjira.repository;
 
-import com.smartjira.smartjira.dto.DeveloperDto;
-import com.smartjira.smartjira.dto.DeveloperLeaveDto;
-import com.smartjira.smartjira.dto.ProjectDto;
+import com.smartjira.smartjira.dto.*;
 import com.smartjira.smartjira.model.Manager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -46,6 +44,24 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
     AND l.status = com.smartjira.smartjira.enums.StatusLeave.Pending
     """)
     List<DeveloperLeaveDto> findAllLeaveByManagerId(@Param("idManager") int idManager);
+
+    @Query("SELECT new com.smartjira.smartjira.dto.TaskDeveloperDto(u.name, t.name) " +
+            "FROM Task t " +
+            "JOIN t.developer d " +
+            "JOIN d.user u " +
+            "JOIN t.project p " +
+            "WHERE t.status = 'DONE' AND p.manager_id = :idManager")
+    List<TaskDeveloperDto> getAllCompletedTaskDeveloper(@Param("idManager") int idManager);
+
+    @Query("SELECT new com.smartjira.smartjira.dto.TaskType(" +
+            "SUM(CASE WHEN t.status = 'TODO' THEN 1 ELSE 0 END), " +
+            "SUM(CASE WHEN t.status = 'INPROGRESS' THEN 1 ELSE 0 END), " +
+            "SUM(CASE WHEN t.status = 'DONE' THEN 1 ELSE 0 END)) " +
+            "FROM Task t " +
+            "JOIN t.developer d " +
+            "JOIN t.project p " +
+            "WHERE p.manager.id = :idManager")
+    TaskType countAllTaskTypes(@Param("idManager") int idManager);
 
 
 

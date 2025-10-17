@@ -1,5 +1,6 @@
 package com.smartjira.smartjira.service;
 
+import com.smartjira.smartjira.dto.TaskType;
 import com.smartjira.smartjira.model.Project;
 import com.smartjira.smartjira.model.Tasks;
 import com.smartjira.smartjira.repository.ProjectRepository;
@@ -36,6 +37,8 @@ public class TaskService {
     public List<Tasks> findAllTaskByDeveloperId(int developerId) {
         return  taskRepository.findAllTaskByDeveloperId(developerId);
     }
+
+
 
 
 }

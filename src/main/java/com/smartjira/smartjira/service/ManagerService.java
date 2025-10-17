@@ -1,8 +1,6 @@
 package com.smartjira.smartjira.service;
 
-import com.smartjira.smartjira.dto.DeveloperDto;
-import com.smartjira.smartjira.dto.DeveloperLeaveDto;
-import com.smartjira.smartjira.dto.ProjectDto;
+import com.smartjira.smartjira.dto.*;
 import com.smartjira.smartjira.repository.ManagerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,4 +23,14 @@ public class ManagerService {
     public List<DeveloperLeaveDto> getAllPendingLeavesByManagerId(int managerId){
         return managerRepository.findAllLeaveByManagerId(managerId);
     }
+
+    public List<TaskDeveloperDto> getAllCompletedTaskDeveloperByManagerId(int managerId){
+       return managerRepository.getAllCompletedTaskDeveloper(managerId);
+    }
+
+    public TaskType getTaskCountsByManager(int managerId) {
+        return managerRepository.countAllTaskTypes(managerId);
+    }
+
+
 }

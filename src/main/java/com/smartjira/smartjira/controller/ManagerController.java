@@ -1,8 +1,6 @@
 package com.smartjira.smartjira.controller;
 
-import com.smartjira.smartjira.dto.DeveloperDto;
-import com.smartjira.smartjira.dto.DeveloperLeaveDto;
-import com.smartjira.smartjira.dto.ProjectDto;
+import com.smartjira.smartjira.dto.*;
 import com.smartjira.smartjira.service.ManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +41,22 @@ public class ManagerController {
         m.put("pendingleaves", leaves);
         return ResponseEntity.ok(m);
     }
+
+    @GetMapping("/dasboard/{idManger}")
+    public ResponseEntity<Map<String,List<TaskDeveloperDto>>> getCompletedTaskDev(@PathVariable int idManger) {
+        List<TaskDeveloperDto>list=managerService.getAllCompletedTaskDeveloperByManagerId(idManger);
+        HashMap m=new HashMap();
+        m.put("completedtaskdevelopers", list);
+        return ResponseEntity.ok(m);
+    }
+
+    @GetMapping("/counts/{managerId}")
+    public ResponseEntity<Map<String,TaskType>> getTaskCounts(@PathVariable int managerId) {
+        TaskType counts = managerService.getTaskCountsByManager(managerId);
+        HashMap m=new HashMap();
+        m.put("counts", counts);
+        return ResponseEntity.ok(m);
+    }
+
 
 }
