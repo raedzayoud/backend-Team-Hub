@@ -30,19 +30,21 @@ public interface HrRepository extends JpaRepository<Hr,Long> {
             "JOIN l.developer d " +
             "JOIN d.user u " +
             "WHERE l.status = 'PENDING'")
+
     List<LeaveUserDto> getPendingLeave();
-    @Transactional
-    @Modifying
-    @Query("UPDATE LeaveReason l SET l.status = 'APPROVED' WHERE l.status = 'PENDING'")
-   void updatePendingToApprove();
 
+    // FIX THE QUERY YOU FORGET THE DEVELOPER_id For the update
 
     @Transactional
     @Modifying
-    @Query("UPDATE LeaveReason l SET l.status = 'REJECTED' WHERE l.status = 'PENDING'")
+    @Query("UPDATE LeaveReason l SET l.status = 'APPROVED' WHERE l.status = 'PENDING' AND l.developer.id = :idDev")
+    void updatePendingToApprove(@Param("idDev") int idDev);
 
 
-    void updatePendingToRejected();
+    @Transactional
+    @Modifying
+    @Query("UPDATE LeaveReason l SET l.status = 'REJECTED' WHERE l.status = 'PENDING' AND l.developer.id = :idDev")
+    void updatePendingToRejected(@Param("idDev") int idDev);
 
     @Query("SELECT new com.smartjira.smartjira.dto.LeaveUserDto(l.reason, l.nbDays, u.name) " +
             "FROM LeaveReason l " +

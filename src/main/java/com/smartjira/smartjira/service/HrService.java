@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.service;
 
 import com.smartjira.smartjira.dto.DeveloperDto;
+import com.smartjira.smartjira.dto.LeaveUserDto;
 import com.smartjira.smartjira.dto.UserHrDto;
 import com.smartjira.smartjira.enums.Role;
 import com.smartjira.smartjira.model.Developer;
@@ -56,6 +57,31 @@ public class HrService {
 
     public List<DeveloperDto>SearchDeveloperInHrDashboard(String username) {
         return hrRepository.searchDeveloperInHrDashboard(username);
+    }
+
+
+    // ----------------- Leave Requests -----------------
+    public List<LeaveUserDto> getPendingLeaves() {
+        return hrRepository.getPendingLeave();
+    }
+
+    public List<LeaveUserDto> getApprovedLeaves() {
+        return hrRepository.getApprovedLeave();
+    }
+
+    public List<LeaveUserDto> getRejectedLeaves() {
+        return hrRepository.getRejectedLeave();
+    }
+
+    // ----------------- Approve / Reject -----------------
+    @Transactional
+    public void approveAllPendingLeaves(int idDev) {
+        hrRepository.updatePendingToApprove(idDev);
+    }
+
+    @Transactional
+    public void rejectAllPendingLeaves(int idDev) {
+        hrRepository.updatePendingToRejected(idDev);
     }
 
 
