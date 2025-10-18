@@ -1,9 +1,12 @@
 package com.smartjira.smartjira.service;
 
+import com.smartjira.smartjira.dto.TaskType;
 import com.smartjira.smartjira.model.Developer;
 import com.smartjira.smartjira.repository.DeveloperRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +22,13 @@ public class DeveloperService {
         return developerRepository.getSalary(idDeveloper);
     }
 
+    public List<String>getAllTaskTodo(int idDeveloper) {
+        return developerRepository.getAllTaskTodo(idDeveloper);
+    }
+
+    public TaskType countAllTaskTypes(int idDeveloper) {
+        return developerRepository.countAllTaskTypes(idDeveloper);
+    }
 
 
 }
