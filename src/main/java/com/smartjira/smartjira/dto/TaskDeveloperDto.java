@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class TaskDeveloperDto {
-    private int nameDeveloper;
-    private int nameTask;
+    private String nameDeveloper;
+    private String nameTask;
 }

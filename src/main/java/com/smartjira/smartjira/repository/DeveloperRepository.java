@@ -21,15 +21,15 @@ public interface DeveloperRepository extends CrudRepository<Developer, Long> {
     Integer getSalary(@Param("idDeveloper") int idDeveloper);
 
 
-    @Query("SELECT t.name FROM Tasks t WHERE t.status = 'TODO' AND t.developer_id = :idDev")
+    @Query("SELECT t.name FROM Tasks t WHERE t.status = 'TODO' AND t.developer.id = :idDev")
     List<String> getAllTaskTodo(@Param("idDev") int idDev);
 
     @Query("SELECT new com.smartjira.smartjira.dto.TaskType(" +
             "SUM(CASE WHEN t.status = 'TODO' THEN 1 ELSE 0 END), " +
             "SUM(CASE WHEN t.status = 'INPROGRESS' THEN 1 ELSE 0 END), " +
             "SUM(CASE WHEN t.status = 'DONE' THEN 1 ELSE 0 END)) " +
-            "FROM Task t " +
-            "WHERE t.developer_id = :idDev")
+            "FROM Tasks t " +
+            "WHERE t.developer.id = :idDev")
     TaskType countAllTaskTypes(@Param("idDev") int idDev);
 
 

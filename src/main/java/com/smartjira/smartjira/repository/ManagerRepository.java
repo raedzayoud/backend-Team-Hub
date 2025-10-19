@@ -46,18 +46,18 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
     List<DeveloperLeaveDto> findAllLeaveByManagerId(@Param("idManager") int idManager);
 
     @Query("SELECT new com.smartjira.smartjira.dto.TaskDeveloperDto(u.name, t.name) " +
-            "FROM Task t " +
+            "FROM Tasks t " +
             "JOIN t.developer d " +
             "JOIN d.user u " +
             "JOIN t.project p " +
-            "WHERE t.status = 'DONE' AND p.manager_id = :idManager")
+            "WHERE t.status = 'DONE' AND p.manager.id = :idManager")
     List<TaskDeveloperDto> getAllCompletedTaskDeveloper(@Param("idManager") int idManager);
 
     @Query("SELECT new com.smartjira.smartjira.dto.TaskType(" +
             "SUM(CASE WHEN t.status = 'TODO' THEN 1 ELSE 0 END), " +
             "SUM(CASE WHEN t.status = 'INPROGRESS' THEN 1 ELSE 0 END), " +
             "SUM(CASE WHEN t.status = 'DONE' THEN 1 ELSE 0 END)) " +
-            "FROM Task t " +
+            "FROM Tasks t " +
             "JOIN t.developer d " +
             "JOIN t.project p " +
             "WHERE p.manager.id = :idManager")
