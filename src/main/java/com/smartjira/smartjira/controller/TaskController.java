@@ -32,7 +32,7 @@ public class TaskController {
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Map<String, Tasks>> getTaskById(@PathVariable int id) {
         Tasks task = taskService.getTaskById(id);
         Map<String, Tasks> map = new HashMap<>();
@@ -56,7 +56,7 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/projet/{idProject}")
+    @GetMapping("projet/{idProject}")
     public ResponseEntity<Map<String, List<Tasks>>> getAllTasksByProject(@PathVariable int idProject) {
         List<Tasks>l=taskService.getTasksByProjectId(idProject);
         Map<String, List<Tasks>> map = new HashMap<>();
@@ -64,7 +64,7 @@ public class TaskController {
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/developer/task/{idDeveloper}")
+    @GetMapping("developer/task/{idDeveloper}")
     public ResponseEntity<Map<String, List<Tasks>>> findAllTaskByDeveloperId(@PathVariable int idDeveloper) {
         List<Tasks>l=taskService.findAllTaskByDeveloperId(idDeveloper);
         Map<String, List<Tasks>> map = new HashMap<>();

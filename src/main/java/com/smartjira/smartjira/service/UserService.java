@@ -19,7 +19,7 @@ public class UserService {
     public User authenticate(String email, String password) {
        Optional<User> u=userRepository.findByEmail(email);
        if(u.isPresent()){
-           if(passwordEncoder.matches(password,u.get().getPassword())){
+           if(password.equals(u.get().getPassword())){
                return u.get();
            }
        }

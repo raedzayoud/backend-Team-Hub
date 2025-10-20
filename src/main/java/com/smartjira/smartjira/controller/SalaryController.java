@@ -12,13 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/salary")
+@RequestMapping("/api/v1/salary/")
 @RequiredArgsConstructor
 public class SalaryController {
 
     private final SalaryService salaryService;
 
-    @GetMapping("/total-average")
+    @GetMapping("total-average")
     public ResponseEntity<Map<String,PayrollDto>>  getTotalAndAverageSalary() {
         HashMap<String,PayrollDto> map = new HashMap<>();
         map.put("totalavrege",salaryService.getTotalAndAverageSalary());

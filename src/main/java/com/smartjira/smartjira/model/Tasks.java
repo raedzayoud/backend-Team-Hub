@@ -1,5 +1,7 @@
     package com.smartjira.smartjira.model;
 
+    import com.fasterxml.jackson.annotation.JsonBackReference;
+    import com.fasterxml.jackson.annotation.JsonIgnore;
     import com.smartjira.smartjira.enums.Role;
     import com.smartjira.smartjira.enums.Status;
     import jakarta.persistence.*;
@@ -25,6 +27,7 @@
         @ManyToOne
         @JoinColumn(name = "developer_id", nullable = false)
         @NotNull(message = "Developer must be assigned to the task")
+        @JsonIgnore
         private Developer developer;
 
         @Enumerated(EnumType.STRING)
@@ -32,6 +35,7 @@
 
         @ManyToOne
         @JoinColumn(name = "projet_id", nullable = false)
+        @JsonIgnore
         private Project project;
 
 

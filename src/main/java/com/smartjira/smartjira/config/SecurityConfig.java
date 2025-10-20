@@ -20,7 +20,14 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(e -> e.authenticationEntryPoint(authenticationEntryPoint))
                 .authorizeHttpRequests(auth -> auth
-                       // .requestMatchers("/api/products/**").authenticated()
+                        .requestMatchers("/api/v1/task/**").authenticated()
+                        .requestMatchers("/api/v1/project/").authenticated()
+                        .requestMatchers("/api/v1/manager/").authenticated()
+                        .requestMatchers("/api/v1/task/").authenticated()
+                        .requestMatchers("/api/v1/developer/").authenticated()
+                        .requestMatchers("/api/v1/hr").authenticated()
+                        .requestMatchers("/api/v1/leave/").authenticated()
+                        .requestMatchers("/api/v1/salary/").authenticated()
                         .anyRequest().permitAll() // <-- all other endpoints are public
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

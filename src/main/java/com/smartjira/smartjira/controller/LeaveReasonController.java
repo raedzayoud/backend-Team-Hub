@@ -17,7 +17,7 @@
 
     @AllArgsConstructor
     @RestController
-    @RequestMapping("/api/v1/leave")
+    @RequestMapping("/api/v1/leave/")
     public class LeaveReasonController {
 
         private final LeaveReasonService leaveReasonService;

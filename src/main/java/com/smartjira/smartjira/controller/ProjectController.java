@@ -1,7 +1,10 @@
 package com.smartjira.smartjira.controller;
 
+import com.smartjira.smartjira.dto.CreateProjectDto;
+import com.smartjira.smartjira.model.Manager;
 import com.smartjira.smartjira.model.Project;
 import com.smartjira.smartjira.model.Tasks;
+import com.smartjira.smartjira.service.ManagerService;
 import com.smartjira.smartjira.service.ProjectService;
 import com.smartjira.smartjira.service.TaskService;
 import lombok.AllArgsConstructor;
@@ -19,6 +22,7 @@ import java.util.Map;
 public class ProjectController {
 
     private final ProjectService projectService;
+    private final ManagerService  managerService;
 
     @GetMapping
     public ResponseEntity<Map<String,List<Project>>> getAllProjects() {
@@ -37,12 +41,22 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> createProject(@RequestBody Project project) {
+    public ResponseEntity<Map<String, String>> createProject(@RequestBody CreateProjectDto projectDto) {
         Map<String, String> map = new HashMap<>();
-        Project p= projectService.addProject(project);
+
+        Project project = new Project();
+        project.setName(projectDto.getName());
+
+        // Fetch manager by ID
+        Manager manager = managerService.getManagerById(projectDto.getId_manager());
+        project.setManager(manager);
+
+        projectService.addProject(project);
+
         map.put("success", "Project created successfully");
         return ResponseEntity.ok(map);
     }
+
 
 
 

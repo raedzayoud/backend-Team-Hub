@@ -1,6 +1,7 @@
 package com.smartjira.smartjira.service;
 
 import com.smartjira.smartjira.dto.*;
+import com.smartjira.smartjira.model.Manager;
 import com.smartjira.smartjira.repository.ManagerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,12 @@ public class ManagerService {
     public TaskType getTaskCountsByManager(int managerId) {
         return managerRepository.countAllTaskTypes(managerId);
     }
+
+    public Manager getManagerById(int id) {
+        return managerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Manager not found with ID: " + id));
+    }
+
 
 
 }

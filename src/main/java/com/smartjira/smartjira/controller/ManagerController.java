@@ -18,7 +18,7 @@ public class ManagerController {
 
     private final ManagerService managerService;
 
-    @GetMapping("/{id}/developers")
+    @GetMapping("developers/{id}")
     public ResponseEntity<Map<String, List<DeveloperDto>>> getDevelopersByManager(@PathVariable int id) {
         List<DeveloperDto> developers = managerService.getDevelopersByManagerId(id);
         Map<String, List<DeveloperDto>> response = new HashMap<>();
@@ -26,7 +26,7 @@ public class ManagerController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{idManager}")
+    @GetMapping("{idManager}")
     public ResponseEntity<Map<String, List<ProjectDto>>> getProjectsByManagerId(@PathVariable int idManager) {
         List<ProjectDto> projects = managerService.getProjectsByManagerId(idManager);
         Map<String, List<ProjectDto>> response = new HashMap<>();
@@ -34,7 +34,7 @@ public class ManagerController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{idManager}/pending-leaves")
+    @GetMapping("pending-leaves/{idManager}")
     public ResponseEntity<Map<String,List<DeveloperLeaveDto>>> getPendingLeaves(@PathVariable int idManager){
         List<DeveloperLeaveDto> leaves = managerService.getAllPendingLeavesByManagerId(idManager);
         HashMap m=new HashMap();
