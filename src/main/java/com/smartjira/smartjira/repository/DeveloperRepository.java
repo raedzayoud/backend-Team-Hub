@@ -1,5 +1,6 @@
 package com.smartjira.smartjira.repository;
 
+import com.smartjira.smartjira.dto.DetailsDevloperDto;
 import com.smartjira.smartjira.dto.TaskType;
 import com.smartjira.smartjira.model.Developer;
 import org.springframework.data.jpa.repository.Query;
@@ -31,6 +32,12 @@ public interface DeveloperRepository extends CrudRepository<Developer, Long> {
             "FROM Tasks t " +
             "WHERE t.developer.id = :idDev")
     TaskType countAllTaskTypes(@Param("idDev") int idDev);
+
+    @Query("SELECT new com.smartjira.smartjira.dto.DetailsDevloperDto(d.id, u.id, d.manager.id, u.name, u.email) " +
+            "FROM Developer d INNER JOIN d.user u WHERE u.email = :email")
+    DetailsDevloperDto getDetailsDeveloperByEmail(@Param("email") String email);
+
+
 
 
 

@@ -65,4 +65,8 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
     TaskType countAllTaskTypes(@Param("idManager") int idManager);
 
     Optional<Manager> findById(int id);
+
+    @Query("SELECT new com.smartjira.smartjira.dto.DetailsManagerDto(m.id, u.id, u.name, u.email) " +
+            "FROM Manager m INNER JOIN m.user u WHERE u.email = :email")
+    DetailsManagerDto getDetailsManagerByEmail(@Param("email") String email);
 }

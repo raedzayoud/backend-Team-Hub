@@ -1,5 +1,6 @@
 package com.smartjira.smartjira.controller;
 
+import com.smartjira.smartjira.config.JwtService;
 import com.smartjira.smartjira.dto.*;
 import com.smartjira.smartjira.service.ManagerService;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class ManagerController {
 
     private final ManagerService managerService;
+    private final JwtService jwtService;
 
     @GetMapping("developers/{id}")
     public ResponseEntity<Map<String, List<DeveloperDto>>> getDevelopersByManager(@PathVariable int id) {
@@ -57,6 +59,19 @@ public class ManagerController {
         m.put("counts", counts);
         return ResponseEntity.ok(m);
     }
+
+
+    @GetMapping("details")
+    public ResponseEntity<Map<String, DetailsManagerDto>>getDetails(@RequestHeader("Authorization")String token) {
+        String jwt = token.substring(7);
+        String email=jwtService.extractUsername(jwt);
+        DetailsManagerDto details = managerService.getDetailsManagerByEmail(email);
+        Map<String, DetailsManagerDto> response = new HashMap<>();
+        response.put("detailsManager", details);
+        return ResponseEntity.ok(response);
+    }
+
+
 
 
 }

@@ -38,6 +38,10 @@ public class ManagerService {
                 .orElseThrow(() -> new RuntimeException("Manager not found with ID: " + id));
     }
 
+    public DetailsManagerDto getDetailsManagerByEmail(String email) {
+        return managerRepository.getDetailsManagerByEmail(email);
+    }
+
 
 
 }

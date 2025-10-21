@@ -36,7 +36,7 @@ public class Developer {
     private List<Tasks>tasks;
 
     @ManyToOne
-    @JoinColumn(name = "manager_id",unique = true,nullable = true)
+    @JoinColumn(name = "manager_id",unique = false,nullable = true)
     private Manager manager;
 
 }

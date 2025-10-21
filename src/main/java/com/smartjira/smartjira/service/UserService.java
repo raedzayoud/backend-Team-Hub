@@ -1,5 +1,6 @@
 package com.smartjira.smartjira.service;
 
+import com.smartjira.smartjira.dto.DetailsDevloperDto;
 import com.smartjira.smartjira.enums.Role;
 import com.smartjira.smartjira.model.User;
 import com.smartjira.smartjira.repository.UserRepository;
@@ -41,6 +42,8 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+
 
 
 }

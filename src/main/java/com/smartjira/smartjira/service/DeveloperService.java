@@ -1,5 +1,6 @@
 package com.smartjira.smartjira.service;
 
+import com.smartjira.smartjira.dto.DetailsDevloperDto;
 import com.smartjira.smartjira.dto.TaskType;
 import com.smartjira.smartjira.model.Developer;
 import com.smartjira.smartjira.repository.DeveloperRepository;
@@ -28,6 +29,10 @@ public class DeveloperService {
 
     public TaskType countAllTaskTypes(int idDeveloper) {
         return developerRepository.countAllTaskTypes(idDeveloper);
+    }
+
+    public DetailsDevloperDto getDetailsDevloperByEmail(String email) {
+        return developerRepository.getDetailsDeveloperByEmail(email);
     }
 
 
