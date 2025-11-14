@@ -19,7 +19,7 @@ public class DeveloperService {
                 .orElseThrow(() -> new RuntimeException("Developer id not found"));
     }
 
-    public int getSarlary(int idDeveloper) {
+    public Integer getSarlary(int idDeveloper) {
         return developerRepository.getSalary(idDeveloper);
     }
 

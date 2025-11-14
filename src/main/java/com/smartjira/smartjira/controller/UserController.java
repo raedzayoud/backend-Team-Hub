@@ -21,6 +21,8 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200") // allow requests from Angular
 public class UserController {
 
+    // All function are test it
+
     private final UserService userService;
     private final JwtService jwtService;
 

@@ -17,7 +17,7 @@ import java.util.Map;
 public class SalaryController {
 
     private final SalaryService salaryService;
-
+    // All function is test it
     @GetMapping("total-average")
     public ResponseEntity<Map<String,PayrollDto>>  getTotalAndAverageSalary() {
         HashMap<String,PayrollDto> map = new HashMap<>();

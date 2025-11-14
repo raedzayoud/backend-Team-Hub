@@ -24,6 +24,8 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ManagerService  managerService;
 
+    // All function is tested on bruno
+
     @GetMapping
     public ResponseEntity<Map<String,List<Project>>> getAllProjects() {
        List<Project> projects=  projectService.getAllProjects();

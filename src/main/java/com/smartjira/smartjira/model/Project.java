@@ -18,10 +18,11 @@ public class Project {
     private Long id;
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
     private List<Tasks> tasks;
 

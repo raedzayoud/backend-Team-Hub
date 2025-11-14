@@ -18,7 +18,7 @@ import java.util.Map;
 public class DeveloperController {
     private final DeveloperService developerService;
     private  final JwtService jwtService;
-
+    // All Function is test on Bruno
     @GetMapping("{idDeveloper}")
     public ResponseEntity<Map<String, Integer>> getSalary(@PathVariable int idDeveloper) {
         Integer salary = developerService.getSarlary(idDeveloper);
