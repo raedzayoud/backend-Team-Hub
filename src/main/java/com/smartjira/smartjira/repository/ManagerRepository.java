@@ -22,7 +22,7 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
     List<DeveloperDto> findAllDevelopersByManagerId(@Param("id") int id);
 
     @Query("""
-        SELECT new com.smartjira.smartjira.dto.ProjectDto(p.name)
+        SELECT new com.smartjira.smartjira.dto.ProjectDto(p.id,p.name)
         FROM Manager m
         JOIN m.projects p
         WHERE m.id = :idManager
