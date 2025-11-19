@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 
     @Query("""
-        SELECT DISTINCT new com.smartjira.smartjira.dto.DeveloperDto(d.user.name, d.user.email)
+        SELECT DISTINCT new com.smartjira.smartjira.dto.DeveloperDto(d.user.id,d.user.name, d.user.email)
         FROM Manager m
         JOIN m.projects p
         JOIN p.tasks t
