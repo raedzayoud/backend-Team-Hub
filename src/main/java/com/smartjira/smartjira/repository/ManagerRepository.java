@@ -13,12 +13,10 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 
     @Query("""
     SELECT DISTINCT new com.smartjira.smartjira.dto.DeveloperDto(d.id, d.user.name, d.user.email)
-    FROM Manager m
-    JOIN m.projects p
-    JOIN p.tasks t
-    JOIN t.developer d
-    WHERE m.id = :id
+    FROM Developer d
+    WHERE d.manager.id = :id
 """)
+
     List<DeveloperDto> findAllDevelopersByManagerId(@Param("id") int id);
 
 

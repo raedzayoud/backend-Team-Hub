@@ -1,8 +1,6 @@
 package com.smartjira.smartjira.controller;
 
-import com.smartjira.smartjira.dto.DeveloperDto;
-import com.smartjira.smartjira.dto.LeaveUserDto;
-import com.smartjira.smartjira.dto.UserHrDto;
+import com.smartjira.smartjira.dto.*;
 import com.smartjira.smartjira.model.Developer;
 import com.smartjira.smartjira.service.HrService;
 import lombok.AllArgsConstructor;
@@ -21,6 +19,24 @@ public class HrController {
     private final HrService hrService;
 
     // ----------------- Developer Management -----------------
+
+
+    @GetMapping("/developers/without-manager")
+    public List<UserWithoutManagerDto> getDevelopersWithoutManager() {
+        return hrService.getAllDevelopersWithoutManagers();
+    }
+
+
+    @PutMapping("/affecteManager/{userId}/manager/{managerId}")
+    public ResponseEntity<Map<String,String>> affectManager(
+            @PathVariable long userId,
+            @PathVariable long managerId) {
+
+        hrService.affectDeveloperToManager(managerId, userId);
+        Map<String,String> map = new HashMap<>();
+        map.put("status", "Manager assigned successfully");
+        return ResponseEntity.ok(map);
+    }
 
     @PostMapping("/createDeveloper")
     public ResponseEntity<Map<String, String>> createEmployee(@RequestBody UserHrDto dto) {
@@ -47,6 +63,14 @@ public class HrController {
         response.put("developers", list);
         return ResponseEntity.ok(response);
     }
+
+   // Manages
+   @GetMapping("/Managers")
+   public ResponseEntity<Map<String,List<ManagerDto>>> getManagers() {
+        Map<String,List<ManagerDto>> response = new HashMap<>();
+        response.put("managers", hrService.getAllManagers());
+       return ResponseEntity.ok(response);
+   }
 
     // ----------------- Leave Requests -----------------
 

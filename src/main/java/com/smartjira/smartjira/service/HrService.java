@@ -1,8 +1,6 @@
 package com.smartjira.smartjira.service;
 
-import com.smartjira.smartjira.dto.DeveloperDto;
-import com.smartjira.smartjira.dto.LeaveUserDto;
-import com.smartjira.smartjira.dto.UserHrDto;
+import com.smartjira.smartjira.dto.*;
 import com.smartjira.smartjira.enums.Role;
 import com.smartjira.smartjira.model.Developer;
 import com.smartjira.smartjira.model.Salary;
@@ -57,6 +55,19 @@ public class HrService {
 
     public List<DeveloperDto>SearchDeveloperInHrDashboard(String username) {
         return hrRepository.searchDeveloperInHrDashboard(username);
+    }
+
+    @Transactional
+    public void affectDeveloperToManager(long managerId, long userId) {
+        hrRepository.affectDeveloperManagerId(managerId, userId);
+    }
+
+    public List<ManagerDto> getAllManagers() {
+        return hrRepository.getAllManagers();
+    }
+
+    public List<UserWithoutManagerDto> getAllDevelopersWithoutManagers() {
+        return hrRepository.getAllDeveloperWithoutManagers();
     }
 
 
