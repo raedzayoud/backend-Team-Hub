@@ -98,6 +98,13 @@ public interface HrRepository extends JpaRepository<Hr,Long> {
     @Query("select count(l)from  LeaveReason l where l.status='APPROVED'")
     int countApprovedLeave();
 
+    @Query("select sum(s.salary) from Salary s")
+    Long countSumSalaryDeveloper();
+
+    @Query("select avg(s.salary) from Salary s")
+    Double averageSalaryDeveloper();
+
+
 
 
 

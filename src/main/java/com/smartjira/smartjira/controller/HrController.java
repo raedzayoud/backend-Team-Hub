@@ -26,6 +26,20 @@ public class HrController {
         return hrService.getAllDevelopersWithoutManagers();
     }
 
+    @GetMapping("/api/salary/total")
+    public ResponseEntity<Map<String,Long>> getTotalSalary() {
+        HashMap<String,Long> map = new HashMap<>();
+        map.put("salary",hrService.getTotalSalary());
+        return ResponseEntity.ok(map) ;
+    }
+
+    @GetMapping("/api/salary/average")
+    public ResponseEntity<Map<String,Double>> getAverageSalary() {
+        HashMap<String,Double> map = new HashMap<>();
+        map.put("AvergeSalary",hrService.getAverageSalary());
+        return ResponseEntity.ok(map);
+    }
+
 
     @PutMapping("/affecteManager/{userId}/manager/{managerId}")
     public ResponseEntity<Map<String,String>> affectManager(

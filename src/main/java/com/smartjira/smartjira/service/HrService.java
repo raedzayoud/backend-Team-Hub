@@ -70,6 +70,14 @@ public class HrService {
         return hrRepository.getAllDeveloperWithoutManagers();
     }
 
+    public Long getTotalSalary() {
+        return hrRepository.countSumSalaryDeveloper();
+    }
+
+    public Double getAverageSalary() {
+        return hrRepository.averageSalaryDeveloper();
+    }
+
 
     // ----------------- Leave Requests -----------------
     public List<LeaveUserDto> getPendingLeaves() {
